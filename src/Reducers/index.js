@@ -1,5 +1,5 @@
-// Import the ADD_MOVIES action type from "../actions"
-import { ADD_MOVIES } from "../actions";
+// Import the ADD_MOVIES, ADD_FAVORITES, REMOVE_FAVORITES action types from "../actions"
+import { ADD_FAVORITES, ADD_MOVIES, REMOVE_FAVORITES } from "../actions";
 
 // Initial States
 const initialMovieState = {
@@ -9,15 +9,26 @@ const initialMovieState = {
 
 // Reducer function for managing the state related to movies
 export default function movies(state = initialMovieState, action) {
-  // Check the action type
-  if (action.type === ADD_MOVIES) {
-    // If the action type is 'ADD_MOVIES', update the state with the new movies
-    return {
-      ...state,
-      list: action.movies,
-    };
-  }
+  switch(action.type){
+    case ADD_MOVIES:
+      return {
+        ...state,
+        list: action.movies,
+      }
 
-  // If the action type is not 'ADD_MOVIES', return the current state unchanged
-  return state;
+    case ADD_FAVORITES:
+      return {
+        ...state,
+        favourites: [action.movie, ...state.favourites]
+      }
+
+    case REMOVE_FAVORITES:
+      return {
+        ...state,
+        favourites: state.favourites.filter(movie => movie !== action.movie)
+      }
+
+    default:
+      return state;
+  }
 }

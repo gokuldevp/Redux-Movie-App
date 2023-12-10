@@ -12,7 +12,7 @@ class App extends React.Component {
 
     // Subscribe to changes in the Redux store
     store.subscribe(() => {
-      console.log('Unsubscribe');
+      console.log('subscribe');
       // Force update the component when the store changes
       this.forceUpdate();
     });
@@ -21,9 +21,18 @@ class App extends React.Component {
     store.dispatch(addMovies(data));
   }
 
+  isMovieFavorites = (movie) => {
+    const { favourites } = this.props.store.getState();
+    const index = favourites.indexOf(movie);
+
+    // Check if the movie is in the favorites list
+    return index !== -1;
+  }
+
   render() {
     // Get the movies from the Redux store state
     const { list } = this.props.store.getState();
+    console.log('RENDER', this.props.store.getState());
 
     return (
       <div className="App">
@@ -39,6 +48,8 @@ class App extends React.Component {
               <MovieCard
                 movie={movie}
                 key={index}
+                dispatch={this.props.store.dispatch}
+                isFavorites={this.isMovieFavorites(movie)}
               />
             ))}
           </div>
