@@ -109,3 +109,6 @@ store.dispatch({ type: 'DECREMENT' });
 console.log('State after DECREMENT:', store.getState());
 
 ```
+
+### subscribing
+In the context of React and Redux, "subscribing" typically refers to connecting a React component to the Redux store so that the component can receive updates when the state in the store changes. This is achieved using the connect function from react-redux. The connect function subscribes the component to the Redux store, and the component will re-render whenever the relevant part of the store changes.
