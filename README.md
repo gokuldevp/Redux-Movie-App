@@ -70,3 +70,42 @@ const store = createStore(counterReducer);
 
 export default store;
 ```
+
+### dispatch
+In a Redux application, you dispatch actions to the store to trigger state changes. This is typically done using the dispatch function provided by the store. If you're using React with Redux, you often dispatch actions within your React components or other parts of your application.
+
+```js
+// Redux setup
+const { createStore } = Redux;
+
+// Reducer
+const counterReducer = (state = { count: 0 }, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    case 'DECREMENT':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+
+// Create the Redux store
+const store = createStore(counterReducer);
+
+// Log the initial state
+console.log('Initial State:', store.getState());
+
+// Dispatch an action to increment the count
+store.dispatch({ type: 'INCREMENT' });
+
+// Log the state after the first dispatch
+console.log('State after INCREMENT:', store.getState());
+
+// Dispatch another action to decrement the count
+store.dispatch({ type: 'DECREMENT' });
+
+// Log the state after the second dispatch
+console.log('State after DECREMENT:', store.getState());
+
+```
