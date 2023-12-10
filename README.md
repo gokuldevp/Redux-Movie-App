@@ -14,7 +14,7 @@ React Redux is a state management library that works seamlessly with React to ma
 
 ### Actions
 
-Actions are defined in `src/actions/index.js`. They describe the intention to change the state and include a `type` property along with optional payload data.
+Actions are defined in `src/actions/index.js`. They describe the intention to change the state and include a `type` property along with optional payload data.action creators are functions that create and return action objects. Action objects are plain JavaScript objects with a type property that indicates the type of action being performed. They may also include additional data properties relevant to the action.
 
 Example actions:
 

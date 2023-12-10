@@ -1,50 +1,51 @@
+// Commented out the CSS import since it's not provided in the snippet
 // import '../styles/App.css';
+
 import React from 'react';
-import {Navbar, MovieCard} from './'
-import {data} from '../data/data'
-
-
+import { Navbar, MovieCard } from './'; // Assuming these components are correctly imported
+import { data } from "../data/data";
+import { addMovies } from '../actions';
 
 class App extends React.Component {
   componentDidMount() {
-      const {store} = this.props;
+    const { store } = this.props;
 
-      store.subscribe(() => {
-        console.log('Unsubscribe');
-        this.forceUpdate();
-      }
+    // Subscribe to changes in the Redux store
+    store.subscribe(() => {
+      console.log('Unsubscribe');
+      // Force update the component when the store changes
+      this.forceUpdate();
+    });
 
-      );
-
-      store.dispatch({
-        type: 'ADD_MOVIES',
-        movies: data
-      })
+    // Dispatch an action to add movies to the Redux store
+    store.dispatch(addMovies(data));
   }
 
   render() {
-    const movies = this.props.store.getState();
+    // Get the movies from the Redux store state
+    const { list } = this.props.store.getState();
+
     return (
       <div className="App">
-        <Navbar/>
+        <Navbar />
         <div className='main'>
           <div className='tabs'>
             <div className='tab'>Movie</div>
             <div className='tab'>Favourites</div>
           </div>
           <div className='list'>
-          {movies.map((movie, index) => (
-          <MovieCard
-            movie={movie}
-            key={index}
-          />
-          ))}
+            {/* Map over the movies and render MovieCard components */}
+            {list.map((movie, index) => (
+              <MovieCard
+                movie={movie}
+                key={index}
+              />
+            ))}
           </div>
         </div>
       </div>
     );
   }
-
 }
 
 export default App;
